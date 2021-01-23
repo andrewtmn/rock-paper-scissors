@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock Paper Scissors</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+        console.log("Welcome to RPS");
+
+        game();
+
+        function game() {
+            let numRounds = 5;
+            let playerSelection;
+            let computerSelection;
+
+            for (let i = 0; i < 5; i++) {
+                playerSelection = prompt("What's your move?");
+                computerSelection = computerPlay();
+                console.log(calculateRoundResult(playerSelection, computerSelection));
+            }
+        }
+
+        function calculateRoundResult(playerSelection, computerSelection) {
+            if (typeof playerSelection !== "string" ||
+             typeof computerSelection !== "string") {
+                 return undefined;
+            }
+
+            let playerMove = playerSelection.toLowerCase();
+            let computerMove = computerSelection.toLowerCase();
+            let result;
+
+            if (playerMove === computerMove) {
+                result = "It's a Draw!";
+            } else {
+                result = calculateDifferentMoveResult(playerMove, computerMove);
+            }
+
+            return result;
+        }
+
+        function calculateDifferentMoveResult(playerMove, computerMove) {
+            if (playerMove === "rock") {
+                if (computerMove === "scissors") {
+                    return "You Win! Rock beats Scissors";
+                } else {
+                    return "You Lose! Paper beats Rock";
+                }
+            } else if (playerMove === "paper") {
+                if (computerMove === "scissors") {
+                    return "You Lose! Scissors beats Paper";
+                } else {
+                    return "You Win! Paper beats Rock";
+                }
+            } else {
+                if (computerMove === "paper") {
+                    return "You Win! Scissors beats Rock";
+                } else {
+                    return "You Lose! Rock beats Scissors";
+                }
+            }
+        }
+
+        function computerPlay() {
+            let rps = ["Rock", "Paper", "Scissors"];
+            let index = Math.floor(Math.random() * 3);
+            return rps[index];
+        }
+
+    </script>
+</body>
+</html>
